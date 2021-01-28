@@ -19,7 +19,7 @@
     font-family: 'Anton', sans-serif;
 }
 
-#name{
+.name{
     display: inline;
     margin-right: 15px;
 }
@@ -30,7 +30,7 @@
 
 .container{
     width: 80%;
-    height: 100em;
+    min-height: 100vh;
     background-color: bisque;
 }
 
