@@ -9,9 +9,10 @@
 }
 
 .header{
+    position: fixed;
     width: 100%;
     height: 40px;
-    background-color: cornflowerblue;
+    background-color: #6495ed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +20,7 @@
     font-family: 'Anton', sans-serif;
 }
 
-#name{
+.name{
     display: inline;
     margin-right: 15px;
 }
@@ -30,8 +31,10 @@
 
 .container{
     width: 80%;
-    height: 100em;
-    background-color: bisque;
+    min-height: 100vh;
+    background-color: #c2e0e7;
+
+    margin-top: 40px;
 }
 
 .container__item{
