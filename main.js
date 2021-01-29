@@ -2,20 +2,32 @@ const usersURL = 'https://jsonplaceholder.typicode.com/users'
 
 fetch(usersURL).then(response => response.json())
 .then(data => {
-    //клонирование необходимого узла из DOM
-    const item = document.querySelector('.container__item')
 
-    for(let iter = 0; iter < 9; iter++){
-        clone = item.cloneNode(true)
-        //Вставка после item
-        item.after(clone)
-    }
+    let iter = 0
 
-    for(let iter = 0 ; iter < data.length; iter++)
-    {
+    //метод перебора массива
+    data.forEach( () => {
+        const item = document.querySelectorAll('.container__item')[iter]
+
+        item.insertAdjacentHTML('afterend',
+                '            <div class="container__item">\n' +
+                '                <div class="card">\n' +
+                '                    <div class="user_name">User</div>\n' +
+                '                    <div class="user_bio">Info: </div>\n' +
+                '                    <div class="user_posts">Posts: </div>\n' +
+                '                </div>\n' +
+                '            </div>')
+
         let userName = document.querySelectorAll('.user_name')[iter]
         userName.innerHTML = data[iter].username
-    }
+        let userBio = document.querySelectorAll('.user_bio')[iter]
+        userBio.innerHTML = data[iter].email
+        iter++
+    })
+
+    //удаление последней лишней карточки
+    let deleteItem = document.querySelectorAll('.container__item')[data.length]
+    deleteItem.remove()//работает корректно
 
     console.log(data)
 })
@@ -30,26 +42,3 @@ name1.onclick = () => {
         name1.style.color = 'black'
     }
 }
-
-//меняю DOM(пример)
-let userName = document.querySelector('.user_name')
-let userBio = document.querySelector('.user_bio')
-let userPosts = document.querySelector('.user_posts')
-userName.innerHTML = 'Ivan'
-userBio.innerHTML = "<strong>HI!</strong> I'm 19"
-userPosts.innerHTML = 'I have 10 <strong>amasing</strong> POSTS!!!'
-
-
-//метод поиска подходящего блока
-//userName = document.querySelectorAll('.user_name')[1]
-//userName.innerHTML = 'Vladimir'
-
-
-//клонирование необходимого узла из DOM
-// const item = document.querySelector('.container__item')
-
-// for(let iter = 0; iter < 10; iter++){
-//     clone = item.cloneNode(true)
-//     //Вставка после item
-//     item.after(clone)
-// }
