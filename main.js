@@ -28,8 +28,6 @@ fetch(usersURL).then(response => response.json())
     //удаление последней лишней карточки
     let deleteItem = document.querySelectorAll('.container__item')[data.length]
     deleteItem.remove()//работает корректно
-
-    console.log(data)
 })
 
 //меняю цвет по приколу 
@@ -42,3 +40,15 @@ name1.onclick = () => {
         name1.style.color = 'black'
     }
 }
+
+//обрабатываем форму
+your_dirty_history = []
+
+document.querySelector('.form').addEventListener('submit',(e) => {
+    //чтобы форма не отправилась
+    e.preventDefault()
+    let item = document.querySelector('.field').value
+    your_dirty_history.push(item)
+    console.log(your_dirty_history)
+    console.log("Ты ввел:\t\t\t", item)
+})
