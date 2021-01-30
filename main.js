@@ -74,6 +74,21 @@ document.querySelector('.form').addEventListener('submit',(e) => {
                 item.remove()
             }
         })
+
+        //На случай того что ничего не найдено
+        let spaceAfterSearch = document.querySelector('.container__item')
+
+        if(spaceAfterSearch === null){
+            let weDontFind = document.querySelector('.container')
+
+            weDontFind.insertAdjacentHTML('afterbegin',
+                '<div style="text-align: center; font-size: 20px; font-weight: bold; font-style: italic; margin-top: 20px;">К великому сожалению мы ничего не нашли</div>\n' +
+                '<div style="margin-left:auto;margin-right:auto;margin-top: 20px;width: fit-content;">\n' +
+                '  <img src="https://www.meme-arsenal.com/memes/8c46e8ff92c04a1db2ce542b8200d727.jpg" /></div>'
+            )
+        }
+
+
     } else{
         alert('Вы еще ничего не ввели!')
     }
