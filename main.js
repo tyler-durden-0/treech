@@ -2,38 +2,42 @@ const usersURL = 'https://jsonplaceholder.typicode.com/users'
 
 let baseUsernames = []
 
-fetch(usersURL).then(response => response.json())
-.then(data => {
+function requestUsers(){
+    fetch(usersURL).then(response => response.json())
+        .then(data => {
 
-    let iter = 0
+            let iter = 0
 
-    //метод перебора массива
-    data.forEach( () => {
-        const item = document.querySelectorAll('.container__item')[iter]
+            //метод перебора массива
+            data.forEach( () => {
+                const item = document.querySelectorAll('.container__item')[iter]
 
-        item.insertAdjacentHTML('afterend',
-                '            <div class="container__item">\n' +
-                '                <div class="card">\n' +
-                '                    <div class="user_name">User</div>\n' +
-                '                    <div class="user_bio">Info: </div>\n' +
-                '                    <div class="user_posts">Posts: </div>\n' +
-                '                </div>\n' +
-                '            </div>')
+                item.insertAdjacentHTML('afterend',
+                    '            <div class="container__item">\n' +
+                    '                <div class="card">\n' +
+                    '                    <div class="user_name">User</div>\n' +
+                    '                    <div class="user_bio">Info: </div>\n' +
+                    '                    <div class="user_posts">Posts: </div>\n' +
+                    '                </div>\n' +
+                    '            </div>')
 
-        //добавляю имена в массив для последующей фильтрации при поиске
-        baseUsernames.push(data[iter].username)
+                //добавляю имена в массив для последующей фильтрации при поиске
+                baseUsernames.push(data[iter].username)
 
-        let userName = document.querySelectorAll('.user_name')[iter]
-        userName.innerHTML = data[iter].username
-        let userBio = document.querySelectorAll('.user_bio')[iter]
-        userBio.innerHTML = data[iter].email
-        iter++
-    })
+                let userName = document.querySelectorAll('.user_name')[iter]
+                userName.innerHTML = data[iter].username
+                let userBio = document.querySelectorAll('.user_bio')[iter]
+                userBio.innerHTML = data[iter].email
+                iter++
+            })
 
-    //удаление последней лишней карточки
-    let deleteItem = document.querySelectorAll('.container__item')[data.length]
-    deleteItem.remove()//работает корректно
-})
+            //удаление последней лишней карточки
+            let deleteItem = document.querySelectorAll('.container__item')[data.length]
+            deleteItem.remove()//работает корректно
+        })
+}
+
+requestUsers()
 
 //меняю цвет по приколу 
 const name1 = document.querySelector('.name')
@@ -65,7 +69,6 @@ document.querySelector('.form').addEventListener('submit',(e) => {
             return item.toLowerCase() == textFind.toLowerCase()
         })
 
-
         let nodes = document.querySelectorAll('.container__item')
 
         nodes.forEach( (item) => {
@@ -74,7 +77,46 @@ document.querySelector('.form').addEventListener('submit',(e) => {
                 item.remove()
             }
         })
+
+        //На случай того что ничего не найдено
+        let spaceAfterSearch = document.querySelector('.container__item')
+
+        if(spaceAfterSearch === null){
+
+            let weDontFind = document.querySelector('.container')
+
+            weDontFind.insertAdjacentHTML('afterbegin',
+                '<div class="notFoundText" style="text-align: center; font-size: 20px; font-weight: bold; font-style: italic;' +
+                ' margin-top: 20px;">' +
+                'К великому сожалению мы ничего не нашли</div>\n' +
+                '<div style="margin-left:auto;margin-right:auto;margin-top: 20px;width: fit-content;">\n' +
+                '  <img src="https://i.gifer.com/4qb.gif" /></div>'
+            )
+
+            //удаляю кнопку поиска чтобы исбежать повторной обработки этого же события и появления
+            //нескольких кнопок Esc которые уже не в форме(чтобы для Esc не вызывался этот же обработчик)
+            // document.querySelector('.find_button').remove()
+            //
+            // let weWantBack = document.querySelector('.header')
+            //
+            // weWantBack.insertAdjacentHTML('beforeend','<button type="submit" class="esc_button"' +
+            //     ' style="margin-top: 4.2px; margin-left: 4px;">Esc</button>'
+            // )
+        }
     } else{
         alert('Вы еще ничего не ввели!')
     }
 })
+
+//установил интервал для поиска момента когда появиться кнопка
+//а затем добаляю ей слушателя
+// let findEscInterval = setInterval( () => {
+//     if (document.querySelector('.esc_button') !== null) {
+//         //добавляем слушателя события нажатия на кнопку Esc
+//         document.querySelector('.esc_button').addEventListener('click', (event) => {
+//             alert('rjbfer')
+//             clearInterval(findEscInterval)
+//             //document.querySelector()
+//         })
+//     }
+// }, 500)
