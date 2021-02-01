@@ -8,11 +8,12 @@ function requestUsers(){
 
             let iter = 0
 
+            const item = document.querySelector('.container')
+
             //метод перебора массива
             data.forEach( () => {
-                const item = document.querySelectorAll('.container__item')[iter]
 
-                item.insertAdjacentHTML('afterend',
+                item.insertAdjacentHTML('beforeend',
                     '            <div class="container__item">\n' +
                     '                <div class="card">\n' +
                     '                    <div class="user_name">User</div>\n' +
@@ -83,11 +84,13 @@ document.querySelector('.find_button').addEventListener('click',(e) => {
             let weDontFind = document.querySelector('.container')
 
             weDontFind.insertAdjacentHTML('afterbegin',
-                '<div class="notFoundText" style="text-align: center; font-size: 20px; font-weight: bold; font-style: italic;' +
-                ' margin-top: 20px;">' +
+                '<div class="notFoundText">\n' +
+                '  <div style="text-align: center; font-size: 20px; font-weight: bold; font-style: italic; margin-top: 20px;">\n' +
                 'К великому сожалению мы ничего не нашли</div>\n' +
-                '<div style="margin-left:auto;margin-right:auto;margin-top: 20px;width: fit-content;">\n' +
-                '  <img src="https://i.gifer.com/4qb.gif" /></div>'
+                '\t<div style="margin-left:auto;margin-right:auto;margin-top: 20px;width: fit-content;">\n' +
+                '                <img src="https://i.gifer.com/4qb.gif" />\n' +
+                '\t</div>\n' +
+                '</div>'
             )
 
             //удаляю кнопку поиска чтобы исбежать повторной обработки этого же события и появления
@@ -107,12 +110,28 @@ document.querySelector('.find_button').addEventListener('click',(e) => {
 //а затем добаляю ей слушателя
 let findEscInterval = setInterval( () => {
     if (document.querySelector('.esc_button') !== null) {
+
         //прерываю интервал как только нашел кнопку esc
         //и выполнить то что в call-back функции
         clearInterval(findEscInterval)
+
         //добавляем слушателя события нажатия на кнопку Esc
         document.querySelector('.esc_button').addEventListener('click', (event) => {
-            alert('rjbfer')
-        })  
+            //удаляю Криминальное чтиво
+            document.querySelector('.notFoundText').remove()
+
+            //Удаляю содержимое поля
+            document.querySelector('.field').value = ''
+
+            //удаляю кнопку Esc
+            document.querySelector('.esc_button').remove()
+
+            //запрашиваю пользователей
+            requestUsers()
+
+            //добавляю кнопку поиска
+            document.querySelector('.header').insertAdjacentHTML('beforeend',
+                '<button type="submit" class="find_button">Find</button>')
+        })
     }
 }, 500)
