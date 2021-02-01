@@ -43,10 +43,10 @@ requestUsers()
 const name1 = document.querySelector('.name')
 
 name1.onclick = () => {
-    if(name1.style.color === 'black'){
-        name1.style.color = 'red'
-    }else{
+    if(name1.style.color === 'red'){
         name1.style.color = 'black'
+    }else{
+        name1.style.color = 'red'
     }
 }
 
@@ -54,7 +54,7 @@ name1.onclick = () => {
 let find_result
 
 //обрабатываем форму
-document.querySelector('.form').addEventListener('submit',(e) => {
+document.querySelector('.find_button').addEventListener('click',(e) => {
 
     //чтобы форма не отправилась
     e.preventDefault()
