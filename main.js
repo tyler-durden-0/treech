@@ -53,11 +53,8 @@ name1.onclick = () => {
 //переменная в которой будет храниться результат поиска либо его отсутсвие
 let find_result
 
-//обрабатываем форму
+//обрабатываем нажатие на кнопку
 document.querySelector('.find_button').addEventListener('click',(e) => {
-
-    //чтобы форма не отправилась
-    e.preventDefault()
 
     let textFind = document.querySelector('.field').value
 
@@ -94,14 +91,12 @@ document.querySelector('.find_button').addEventListener('click',(e) => {
             )
 
             //удаляю кнопку поиска чтобы исбежать повторной обработки этого же события и появления
-            //нескольких кнопок Esc которые уже не в форме(чтобы для Esc не вызывался этот же обработчик)
-            // document.querySelector('.find_button').remove()
-            //
-            // let weWantBack = document.querySelector('.header')
-            //
-            // weWantBack.insertAdjacentHTML('beforeend','<button type="submit" class="esc_button"' +
-            //     ' style="margin-top: 4.2px; margin-left: 4px;">Esc</button>'
-            // )
+            //нескольких кнопок Esc
+            document.querySelector('.find_button').remove()
+
+            let weWantBack = document.querySelector('.header')
+
+            weWantBack.insertAdjacentHTML('beforeend','<button type="submit" class="esc_button">Esc</button>')
         }
     } else{
         alert('Вы еще ничего не ввели!')
@@ -110,13 +105,14 @@ document.querySelector('.find_button').addEventListener('click',(e) => {
 
 //установил интервал для поиска момента когда появиться кнопка
 //а затем добаляю ей слушателя
-// let findEscInterval = setInterval( () => {
-//     if (document.querySelector('.esc_button') !== null) {
-//         //добавляем слушателя события нажатия на кнопку Esc
-//         document.querySelector('.esc_button').addEventListener('click', (event) => {
-//             alert('rjbfer')
-//             clearInterval(findEscInterval)
-//             //document.querySelector()
-//         })
-//     }
-// }, 500)
+let findEscInterval = setInterval( () => {
+    if (document.querySelector('.esc_button') !== null) {
+        //прерываю интервал как только нашел кнопку esc
+        //и выполнить то что в call-back функции
+        clearInterval(findEscInterval)
+        //добавляем слушателя события нажатия на кнопку Esc
+        document.querySelector('.esc_button').addEventListener('click', (event) => {
+            alert('rjbfer')
+        })  
+    }
+}, 500)
