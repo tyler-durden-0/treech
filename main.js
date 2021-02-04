@@ -34,9 +34,6 @@ function requestUsers(){
                 iter++
             })
 
-            //удаление последней лишней карточки
-            let deleteItem = document.querySelectorAll('.container__item')[data.length]
-            deleteItem.remove()//работает корректно
         })
 }
 
@@ -82,7 +79,7 @@ function clickOnButtonFind() {
                 weDontFind.insertAdjacentHTML('afterbegin',
                     '<div class="notFoundText">\n' +
                     '  <div style="text-align: center; font-size: 20px; font-weight: bold; font-style: italic; margin-top: 20px;">\n' +
-                    'К великому сожалению мы ничего не нашли</div>\n' +
+                    `К великому сожалению, по Вашему запросу "<strong>${textFind}</strong>", мы ничего не нашли</div>\n` +
                     '\t<div style="margin-left:auto;margin-right:auto;margin-top: 20px;width: fit-content;">\n' +
                     '                <img src="https://i.gifer.com/4qb.gif" />\n' +
                     '\t</div>\n' +
