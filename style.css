@@ -82,3 +82,23 @@
 
     font-size: 20px;
 }
+
+.albums_ref {
+    text-decoration: none;
+    color: black;
+}
+
+.albums_ref:hover {
+    color: red;
+    transition: color .2s linear;
+}
+
+.posts_ref {
+    color: black;
+    text-decoration: none;
+}
+
+.posts_ref:hover {
+    color: red;
+    transition: color .2s linear;
+}

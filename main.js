@@ -20,8 +20,8 @@ function requestUsers(){
                     '                <div class="card">\n' +
                     '                    <div class="user_name">User</div>\n' +
                     '                    <div class="user_bio">Info: </div>\n' +
-                    '                    <div class="user_albums">Albums: </div>\n' +
-                    '                    <div class="user_posts">Posts: </div>\n' +
+                    '                    <div class="user_albums">Albums: <a class="albums_ref" href="">See albums</a></div>\n' +
+                    '                    <div class="user_posts">Posts: <a class="posts_ref" href="">See posts</a></div>\n' +
                     '                </div>\n' +
                     '            </div>')
 
