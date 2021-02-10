@@ -27,7 +27,7 @@
 
 .container{
     width: 80%;
-    min-height: 100vh;
+    min-height: 150vh;
     background-color: #c2e0e7;
 
     margin-top: 40px;
@@ -52,35 +52,29 @@
 
     border: solid 1px black;
     border-radius: 5px;
+
+    font-size: 20px;
 }
 
 .user_name{
     width: fit-content;
     margin-top: 5px;
     margin-left: 5px;
-
-    font-size: 20px;
 }
 
 .user_bio{
     width: fit-content;
     margin-left: 5px;
-
-    font-size: 20px;
 }
 
 .user_albums {
     width: fit-content;
     margin-left: 5px;
-
-    font-size: 20px;
 }
 
 .user_posts{
     width: fit-content;
     margin-left: 5px;
-
-    font-size: 20px;
 }
 
 .albums_ref {
