@@ -17,11 +17,11 @@ function requestUsers(){
 
                 item.insertAdjacentHTML('beforeend',
                     '            <div class="container__item">\n' +
-                    '                <div class="card">\n' +
+                    `                <div class="card">\n` +
                     '                    <div class="user_name">User</div>\n' +
                     '                    <div class="user_bio">Info: </div>\n' +
                     '                    <div class="user_albums">Albums: <a class="albums_ref" href="">See albums</a></div>\n' +
-                    '                    <div class="user_posts">Posts: <a class="posts_ref" href="posts/posts.html">See posts</a></div>\n' +
+                    `                    <div class="user_posts">Posts: <a class="posts_ref" href="" data-userid=${data[iter].id}>See posts</a></div>\n` +
                     '                </div>\n' +
                     '            </div>')
 
@@ -145,3 +145,31 @@ let findEscInterval = setInterval( () => {
     }
 
 }, 500)
+
+var numberOfUser
+document.querySelector('.main').addEventListener('click', (event) => {
+    //отменяю дефолтное поведение
+    event.preventDefault()
+
+    if(event.target.dataset.userid !== undefined){
+        numberOfUser = event.target.dataset.userid
+        console.log(numberOfUser)
+        document.querySelector('.header').remove()
+        document.querySelector('.main').remove()
+        document.querySelector('.body').insertAdjacentHTML('afterbegin',
+            '<nav>\n' +
+            '    <a href="file:///D:/JS/Wall/index.html">Back home</a>\n' +
+            '</nav>\n' +
+            '<div class="container_posts">\n' +
+            '    <h1>Posts here</h1>\n' +
+            '</div>'
+        )
+
+        if(numberOfUser !== undefined)
+        {
+            fetch(`https://jsonplaceholder.typicode.com/posts/${numberOfUser}`).then(
+                response => response.json()
+            ).then(data => console.log(data))
+        }
+    }
+})

@@ -1,5 +1,6 @@
 *{
-    margin: 0; 
+    margin: 0;
+    padding: 0;
 }
 
 .main{
@@ -97,4 +98,29 @@
 .posts_ref:hover {
     color: red;
     transition: color .2s linear;
+}
+
+nav {
+    padding: 15px;
+    background-color: cornflowerblue;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    color: black;
+    background-color: white;
+}
+
+.container_posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
