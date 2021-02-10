@@ -78,6 +78,7 @@
     margin-left: 5px;
 }
 
+/*Стили ссылок*/
 .albums_ref {
     text-decoration: none;
     color: black;
@@ -100,6 +101,7 @@
     transition: color .2s linear;
 }
 
+/*Стили уже для отображения Постов*/
 nav {
     padding: 15px;
     background-color: cornflowerblue;
@@ -123,4 +125,45 @@ nav a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/*стили для поста и коментов*/
+.post_item {
+    margin-top: 15px;
+    width: 60%;
+    min-height: 200px;
+    background-color: aqua;
+    border-radius: 10px;
+}
+
+.post_title {
+    width: 100%;
+    height: 20%;
+    border-bottom:black 1px solid;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.post_content {
+    max-height: 30%;
+    width: 100%;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: black 1px solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+.comments_prev {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.post_comments {
+    padding: 5px;
+    font-weight: 200;
+    font-size:15px;
 }

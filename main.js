@@ -161,15 +161,48 @@ document.querySelector('.main').addEventListener('click', (event) => {
             '    <a href="file:///D:/JS/Wall/index.html">Back home</a>\n' +
             '</nav>\n' +
             '<div class="container_posts">\n' +
-            '    <h1>Posts here</h1>\n' +
             '</div>'
         )
 
+        //обрабатываю данные с запроса по юзеру
         if(numberOfUser !== undefined)
         {
-            fetch(`https://jsonplaceholder.typicode.com/posts/${numberOfUser}`).then(
+            const posts = []
+
+            fetch(`https://jsonplaceholder.typicode.com/posts?userId=${numberOfUser}`).then(
                 response => response.json()
-            ).then(data => console.log(data))
+            ).then(data => {
+
+                let iter = 0
+
+                const item = document.querySelector('.body')
+
+                //метод перебора массива
+                data.forEach( () => {
+
+                    item.insertAdjacentHTML('beforeend',
+                   '<div class="container_posts">\n' +
+                        '    <div class="post_item">\n' +
+                        '        <div class="post_title"></div>\n' +
+                        '        <div class="post_content"></div>\n' +
+                        '        <div class="comments_prev">\n' +
+                        '            Comments:\n' +
+                        '            <div class="post_comments"></div>\n' +
+                        '            <div class="post_comments"></div>\n' +
+                        '            <div class="post_comments"></div>\n' +
+                        '            <div class="post_comments"></div>\n' +
+                        '            <div class="post_comments"></div>\n' +
+                        '        </div>\n' +
+                        '    </div>\n' +
+                        '</div>')
+
+                    const postTitle = document.querySelectorAll('.post_title')[iter]
+                    postTitle.innerHTML = data[iter].title
+                    const postContent = document.querySelectorAll('.post_content')[iter]
+                    postContent.innerHTML = data[iter].body
+                    iter++
+                })
+            })
         }
     }
 })
