@@ -157,52 +157,50 @@ document.querySelector('.main').addEventListener('click', (event) => {
         document.querySelector('.header').remove()
         document.querySelector('.main').remove()
         document.querySelector('.body').insertAdjacentHTML('afterbegin',
-            '<nav>\n' +
+       '<nav>\n' +
             '    <a href="file:///D:/JS/Wall/index.html">Back home</a>\n' +
             '</nav>\n' +
             '<div class="container_posts">\n' +
             '</div>'
-        )
+       )
 
         //обрабатываю данные с запроса по юзеру
-        if(numberOfUser !== undefined)
-        {
-            const posts = []
 
-            fetch(`https://jsonplaceholder.typicode.com/posts?userId=${numberOfUser}`).then(
-                response => response.json()
-            ).then(data => {
+        const posts = []
 
-                let iter = 0
+        fetch(`https://jsonplaceholder.typicode.com/posts?userId=${numberOfUser}`).then(response => response.json()).then(data => {
 
-                const item = document.querySelector('.body')
+            let iter = 0
 
-                //метод перебора массива
-                data.forEach( () => {
+            const item = document.querySelector('.body')
 
-                    item.insertAdjacentHTML('beforeend',
-                   '<div class="container_posts">\n' +
-                        '    <div class="post_item">\n' +
-                        '        <div class="post_title"></div>\n' +
-                        '        <div class="post_content"></div>\n' +
-                        '        <div class="comments_prev">\n' +
-                        '            Comments:\n' +
-                        '            <div class="post_comments"></div>\n' +
-                        '            <div class="post_comments"></div>\n' +
-                        '            <div class="post_comments"></div>\n' +
-                        '            <div class="post_comments"></div>\n' +
-                        '            <div class="post_comments"></div>\n' +
-                        '        </div>\n' +
-                        '    </div>\n' +
-                        '</div>')
+            //метод перебора массива
+            data.forEach( () => {
 
-                    const postTitle = document.querySelectorAll('.post_title')[iter]
-                    postTitle.innerHTML = data[iter].title
-                    const postContent = document.querySelectorAll('.post_content')[iter]
-                    postContent.innerHTML = data[iter].body
-                    iter++
-                })
-            })
-        }
+                item.insertAdjacentHTML('beforeend',
+               '<div class="container_posts">\n' +
+                    '    <div class="post_item">\n' +
+                    '        <div class="post_title"></div>\n' +
+                    '        <div class="post_content"></div>\n' +
+                    '        <div class="comments_prev">\n' +
+                    '            Comments:\n' +
+                    '            <div class="post_comments"></div>\n' +
+                    '            <div class="post_comments"></div>\n' +
+                    '            <div class="post_comments"></div>\n' +
+                    '            <div class="post_comments"></div>\n' +
+                    '            <div class="post_comments"></div>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</div>'
+                )
+
+                const postTitle = document.querySelectorAll('.post_title')[iter]
+                postTitle.innerHTML = data[iter].title
+                const postContent = document.querySelectorAll('.post_content')[iter]
+                postContent.innerHTML = data[iter].body
+                iter++
+               }
+            )
+        })
     }
 })
