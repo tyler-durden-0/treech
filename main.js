@@ -147,8 +147,8 @@ let findEscInterval = setInterval( () => {
 
 }, 500)
 
-var numberOfUser
-document.querySelector('.main').addEventListener('click', (event) => {
+let numberOfUser
+document.addEventListener('click', (event) => {
     //отменяю дефолтное поведение
     event.preventDefault()
 
@@ -159,7 +159,7 @@ document.querySelector('.main').addEventListener('click', (event) => {
         document.querySelector('.container').remove()
         document.querySelector('.body').insertAdjacentHTML('afterbegin',
        '<nav>\n' +
-            '    <a href="file:///D:/JS/Wall/index.html">Back home</a>\n' +
+            '    <a  data-backhome="1">Back home</a>\n' +
             '</nav>\n'
        )
 
@@ -202,5 +202,20 @@ document.querySelector('.main').addEventListener('click', (event) => {
                 place_for_comments.insertAdjacentHTML('beforeend',`<div class="comment">${el.body}</div>`)
             })
         })
+    } else if(event.target.dataset.backhome !== undefined) {
+        document.querySelector('.body').innerHTML = ''
+        const item = document.querySelector('.body').insertAdjacentHTML('afterbegin','' +
+            '    <div class="header">\n' +
+            '        <h3 class="name">Name</h3>\n' +
+            '        <input type="text" class="field" placeholder="Find person">\n' +
+            '        <button type="submit" class="find_button">Find</button>\n' +
+            '    </div>\n' +
+            '    <div class="main">\n' +
+            '        <div class="container">\n' +
+            '        </div>\n' +
+            '    </div>'
+        )
+        requestUsers()
+        FLAG--
     }
 })
