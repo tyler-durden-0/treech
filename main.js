@@ -1,4 +1,6 @@
 const usersURL = 'https://jsonplaceholder.typicode.com/users'
+const postsURL = 'https://jsonplaceholder.typicode.com/posts'
+const commentsURL = 'https://jsonplaceholder.typicode.com/comments'
 
 let FLAG = 0
 
@@ -162,7 +164,7 @@ document.querySelector('.main').addEventListener('click', (event) => {
        )
 
         //обрабатываю данные с запроса по юзеру
-        fetch(`https://jsonplaceholder.typicode.com/posts?userId=${numberOfUser}`).then(response => response.json()).then(data => {
+        fetch(postsURL+`?userId=${numberOfUser}`).then(response => response.json()).then(data => {
 
             let iter = 0
 
@@ -189,5 +191,21 @@ document.querySelector('.main').addEventListener('click', (event) => {
                }
             )
         })
+
+        // const posts = new Promise( (resolve,reject) => {
+        //     fetch(postsURL +'?userId=1').then(data => resolve(data.json()))
+        // })
+        //
+        // const comments = new Promise( (resolve,reject) => {
+        //     fetch(commentsURL +'?postId=1').then(data => resolve(data.json()))
+        // })
+        //
+        // Promise.all([posts,comments]).then(values => console.log(values))
+    } else if(event.target.dataset.comments !== undefined) {
+        fetch(commentsURL + `?postId=${event.target.dataset.comments}`).then(response => response.json()).then(
+            data => {
+                console.log(data)
+            }
+        )
     }
 })
