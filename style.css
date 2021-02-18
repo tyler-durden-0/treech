@@ -9,6 +9,13 @@
     align-items: center;
 }
 
+.main.posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .header{
     position: fixed;
     width: 100%;

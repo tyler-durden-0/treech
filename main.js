@@ -14,7 +14,6 @@ function requestUsers(){
 
             //метод перебора массива
             data.forEach( () => {
-
                 item.insertAdjacentHTML('beforeend',
                     '            <div class="container__item">\n' +
                     `                <div class="card">\n` +
@@ -24,13 +23,12 @@ function requestUsers(){
                     `                    <div class="user_posts">Posts: <a class="posts_ref" href="" data-userid=${data[iter].id}>See posts</a></div>\n` +
                     '                </div>\n' +
                     '            </div>')
-
                 //добавляю имена в массив для последующей фильтрации при поиске
                 baseUsernames.push(data[iter].username)
 
-                let userName = document.querySelectorAll('.user_name')[iter]
+                const userName = document.querySelectorAll('.user_name')[iter]
                 userName.innerHTML = data[iter].username
-                let userBio = document.querySelectorAll('.user_bio')[iter]
+                const userBio = document.querySelectorAll('.user_bio')[iter]
                 userBio.innerHTML = data[iter].email
                 iter++
             })
@@ -56,13 +54,13 @@ function clickOnButtonFind() {
     //обрабатываем нажатие на кнопку
     document.querySelector('.find_button').addEventListener('click',(e) => {
 
-        let textFind = document.querySelector('.field').value
+        const textFind = document.querySelector('.field').value
 
         //избегаю ситуации случайного нажатия на Find с пустым
         // запросом(чтобы не показало что ничег не найдено, а ведь никто и не искал)
         if(textFind !== "") {
 
-            let nodes = document.querySelectorAll('.container__item')
+            const nodes = document.querySelectorAll('.container__item')
 
             nodes.forEach( (item) => {
                 //после долгих попыток все таки получил, с моей точки зрения, эффективный метод удаления узлов
@@ -76,7 +74,7 @@ function clickOnButtonFind() {
 
             if(spaceAfterSearch === null){
 
-                let weDontFind = document.querySelector('.container')
+                const weDontFind = document.querySelector('.container')
 
                 weDontFind.insertAdjacentHTML('afterbegin',
                     '<div class="notFoundText">\n' +
@@ -95,7 +93,7 @@ function clickOnButtonFind() {
                 //после удаления кнопки ОПУСКАЮ флаг (0)
                 FLAG--
 
-                let weWantBack = document.querySelector('.header')
+                const weWantBack = document.querySelector('.header')
 
                 weWantBack.insertAdjacentHTML('beforeend','<button type="submit" class="esc_button">Esc</button>')
             }
@@ -156,7 +154,7 @@ document.querySelector('.main').addEventListener('click', (event) => {
         numberOfUser = event.target.dataset.userid
         console.log(numberOfUser)
         document.querySelector('.header').remove()
-        document.querySelector('.main').remove()
+        document.querySelector('.container').remove()
         document.querySelector('.body').insertAdjacentHTML('afterbegin',
        '<nav>\n' +
             '    <a href="file:///D:/JS/Wall/index.html">Back home</a>\n' +
@@ -168,20 +166,19 @@ document.querySelector('.main').addEventListener('click', (event) => {
 
             let iter = 0
 
-            const item = document.querySelector('.body')
+            const item = document.querySelector('.main')
+            item.classList.add("posts")
 
             data.forEach( () => {
 
                 item.insertAdjacentHTML('beforeend',
-               '<div class="container_posts">\n' +
                     '    <div class="post_item">\n' +
                     '        <div class="post_title"></div>\n' +
                     '        <div class="post_content"></div>\n' +
                     '        <div class="comments_prev">\n' +
                     `            <a href="#" data-comments=${data[iter].id}>Comments:</a>\n` +
                     '        </div>\n' +
-                    '    </div>\n' +
-                    '</div>'
+                    '    </div>\n'
                 )
 
                 const postTitle = document.querySelectorAll('.post_title')[iter]
