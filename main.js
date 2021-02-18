@@ -124,8 +124,7 @@ function clickOnButtonEsc() {
         requestUsers()
 
         //добавляю кнопку поиска
-        document.querySelector('.header').insertAdjacentHTML('beforeend',
-            '<button type="submit" class="find_button">Find</button>')
+        document.querySelector('.header').insertAdjacentHTML('beforeend', '<button type="submit" class="find_button">Find</button>')
     })
 }
 
@@ -137,11 +136,13 @@ let findEscInterval = setInterval( () => {
         //НАЖАЛ НА КНОПКУ - ПОДНЯЛ ФЛАГ
         FLAG++
         clickOnButtonEsc()
+        document.querySelector('.esc_button').removeEventListener('click', clickOnButtonEsc)
     }
     if(document.querySelector('.find_button') !== null && FLAG === 0){
         //НАЖАЛ НА КНОПКУ - ПОДНЯЛ ФЛАГ
         FLAG++
         clickOnButtonFind()
+        document.querySelector('.find_button').removeEventListener('click', clickOnButtonFind)
     }
 
 }, 500)
@@ -159,22 +160,16 @@ document.querySelector('.main').addEventListener('click', (event) => {
         document.querySelector('.body').insertAdjacentHTML('afterbegin',
        '<nav>\n' +
             '    <a href="file:///D:/JS/Wall/index.html">Back home</a>\n' +
-            '</nav>\n' +
-            '<div class="container_posts">\n' +
-            '</div>'
+            '</nav>\n'
        )
 
         //обрабатываю данные с запроса по юзеру
-
-        const posts = []
-
         fetch(`https://jsonplaceholder.typicode.com/posts?userId=${numberOfUser}`).then(response => response.json()).then(data => {
 
             let iter = 0
 
             const item = document.querySelector('.body')
 
-            //метод перебора массива
             data.forEach( () => {
 
                 item.insertAdjacentHTML('beforeend',
@@ -183,12 +178,7 @@ document.querySelector('.main').addEventListener('click', (event) => {
                     '        <div class="post_title"></div>\n' +
                     '        <div class="post_content"></div>\n' +
                     '        <div class="comments_prev">\n' +
-                    '            Comments:\n' +
-                    '            <div class="post_comments"></div>\n' +
-                    '            <div class="post_comments"></div>\n' +
-                    '            <div class="post_comments"></div>\n' +
-                    '            <div class="post_comments"></div>\n' +
-                    '            <div class="post_comments"></div>\n' +
+                    `            <a href="#" data-comments=${data[iter].id}>Comments:</a>\n` +
                     '        </div>\n' +
                     '    </div>\n' +
                     '</div>'
