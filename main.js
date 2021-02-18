@@ -178,7 +178,7 @@ document.querySelector('.main').addEventListener('click', (event) => {
                     '        <div class="post_title"></div>\n' +
                     '        <div class="post_content"></div>\n' +
                     '        <div class="comments_prev">\n' +
-                    `            <a href="#" data-comments=${data[iter].id}>Comments:</a>\n` +
+                    `            <a href="#" data-comments=${data[iter].id} data-number="${iter}">See comments:</a>\n` +
                     '        </div>\n' +
                     '    </div>\n'
                 )
@@ -191,21 +191,16 @@ document.querySelector('.main').addEventListener('click', (event) => {
                }
             )
         })
-
-        // const posts = new Promise( (resolve,reject) => {
-        //     fetch(postsURL +'?userId=1').then(data => resolve(data.json()))
-        // })
-        //
-        // const comments = new Promise( (resolve,reject) => {
-        //     fetch(commentsURL +'?postId=1').then(data => resolve(data.json()))
-        // })
-        //
-        // Promise.all([posts,comments]).then(values => console.log(values))
     } else if(event.target.dataset.comments !== undefined) {
-        fetch(commentsURL + `?postId=${event.target.dataset.comments}`).then(response => response.json()).then(
-            data => {
-                console.log(data)
-            }
-        )
+        fetch(commentsURL + `?postId=${event.target.dataset.comments}`).then(response => response.json()).then(data => {
+
+            const item = document.querySelectorAll('.comments_prev a')[event.target.dataset.number]
+            item.style.display= 'none'
+
+            const place_for_comments = document.querySelectorAll('.comments_prev')[event.target.dataset.number]
+            data.forEach(el => {
+                place_for_comments.insertAdjacentHTML('beforeend',`<div class="comment">${el.body}</div>`)
+            })
+        })
     }
 })

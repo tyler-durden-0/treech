@@ -138,7 +138,7 @@ nav a:hover {
 .post_item {
     margin-top: 15px;
     width: 60%;
-    min-height: 200px;
+    min-height: fit-content;
     background-color: aqua;
     border-radius: 10px;
 }
@@ -156,17 +156,32 @@ nav a:hover {
     max-height: 30%;
     width: 100%;
     font-size: 20px;
-    text-align: left;
+    text-align: center;
     border-bottom: black 1px solid;
     padding-top: 5px;
     padding-bottom: 5px;
-
 }
 
 .comments_prev {
     font-size: 20px;
     font-weight: 700;
     margin-left: 10px;
+}
+
+.comments_prev a{
+    text-decoration: none;
+    color:black;
+    transition: color .2s linear;
+}
+
+.comments_prev a:hover {
+    color: chocolate;
+}
+
+.comment {
+    font-size: 15px;
+    font-weight: 300;
+    padding: 5px;
 }
 
 .post_comments {
