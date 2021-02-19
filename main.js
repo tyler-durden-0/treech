@@ -202,7 +202,10 @@ document.addEventListener('click', (event) => {
     } else if(event.target.dataset.albumid !== undefined) {
         fetch(photosURL + `?albumId=${event.target.dataset.albumid}`).then(response => response.json()).then(data => {
             data.forEach(element => {
-                console.log(element.thumbnailUrl)
+                const item = document.querySelector(`[data-albumid="${event.target.dataset.albumid}"]`)
+                item.style.display = 'none'
+                item.insertAdjacentHTML('beforebegin',
+                    `<img class="photo" src="${element.thumbnailUrl}">`)
             })
         })
     } else if(event.target.dataset.comments !== undefined) {

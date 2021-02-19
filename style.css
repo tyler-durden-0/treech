@@ -222,3 +222,7 @@ nav a:hover {
 .container_photo a:hover {
     color: cornflowerblue;
 }
+
+.photo {
+    margin: 5px;
+}
