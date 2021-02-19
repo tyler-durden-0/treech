@@ -190,3 +190,13 @@ nav a:hover {
     font-weight: 200;
     font-size:15px;
 }
+
+.album {
+    width: 50%;
+    margin: 10px;
+    height: fit-content;
+    min-height: 50px;
+    background: chocolate;
+    border-radius: 5px;
+
+}

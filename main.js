@@ -1,6 +1,7 @@
 const usersURL = 'https://jsonplaceholder.typicode.com/users'
 const postsURL = 'https://jsonplaceholder.typicode.com/posts'
 const commentsURL = 'https://jsonplaceholder.typicode.com/comments'
+const albumsURL = 'https://jsonplaceholder.typicode.com/albums'
 
 let FLAG = 0
 
@@ -136,24 +137,25 @@ let findEscInterval = setInterval( () => {
 
 }, 500)
 
-let numberOfUser
+function clearWallForSomething() {
+    document.querySelector('.header').remove()
+    document.querySelector('.container').remove()
+    document.querySelector('.body').insertAdjacentHTML('afterbegin',
+        '<nav>\n' +
+        '    <a  data-backhome="1">Back home</a>\n' +
+        '</nav>\n'
+    )
+}
+
 document.addEventListener('click', (event) => {
     //отменяю дефолтное поведение
     event.preventDefault()
 
     if(event.target.dataset.userid !== undefined){
-        numberOfUser = event.target.dataset.userid
-        console.log(numberOfUser)
-        document.querySelector('.header').remove()
-        document.querySelector('.container').remove()
-        document.querySelector('.body').insertAdjacentHTML('afterbegin',
-       '<nav>\n' +
-            '    <a  data-backhome="1">Back home</a>\n' +
-            '</nav>\n'
-       )
+        clearWallForSomething()
 
         //обрабатываю данные с запроса по юзеру
-        fetch(postsURL+`?userId=${numberOfUser}`).then(response => response.json()).then(data => {
+        fetch(postsURL+`?userId=${event.target.dataset.userid}`).then(response => response.json()).then(data => {
 
             let iter = 0
 
@@ -180,6 +182,20 @@ document.addEventListener('click', (event) => {
                }
             )
         })
+    } else if(event.target.dataset.userid_for_album !== undefined) {
+        clearWallForSomething()
+        const item = document.querySelector('.main')
+        item.classList.add('posts')
+
+        fetch(albumsURL + `?userId=${event.target.dataset.userid_for_album}`).then(response => response.json()).then(data => {
+            const item = document.querySelector('.main.posts')
+            data.forEach( element => {
+                    item.insertAdjacentHTML('beforeend',`<div class="album">${element.id} </div>`)
+                }
+            )
+        })
+
+
     } else if(event.target.dataset.comments !== undefined) {
         fetch(commentsURL + `?postId=${event.target.dataset.comments}`).then(response => response.json()).then(data => {
 
