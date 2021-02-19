@@ -2,6 +2,7 @@ const usersURL = 'https://jsonplaceholder.typicode.com/users'
 const postsURL = 'https://jsonplaceholder.typicode.com/posts'
 const commentsURL = 'https://jsonplaceholder.typicode.com/comments'
 const albumsURL = 'https://jsonplaceholder.typicode.com/albums'
+const photosURL = 'https://jsonplaceholder.typicode.com/photos'
 
 let FLAG = 0
 
@@ -142,7 +143,7 @@ function clearWallForSomething() {
     document.querySelector('.container').remove()
     document.querySelector('.body').insertAdjacentHTML('afterbegin',
         '<nav>\n' +
-        '    <a  data-backhome="1">Back home</a>\n' +
+        '    <a href="" data-backhome="1">Back home</a>\n' +
         '</nav>\n'
     )
 }
@@ -199,7 +200,11 @@ document.addEventListener('click', (event) => {
             )
         })
     } else if(event.target.dataset.albumid !== undefined) {
-        console.log(event.target.dataset.albumid)
+        fetch(photosURL + `?albumId=${event.target.dataset.albumid}`).then(response => response.json()).then(data => {
+            data.forEach(element => {
+                console.log(element.thumbnailUrl)
+            })
+        })
     } else if(event.target.dataset.comments !== undefined) {
         fetch(commentsURL + `?postId=${event.target.dataset.comments}`).then(response => response.json()).then(data => {
 
