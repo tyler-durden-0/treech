@@ -192,11 +192,34 @@ nav a:hover {
 }
 
 .album {
-    width: 50%;
+    width: 80%;
     margin: 10px;
     height: fit-content;
     min-height: 50px;
-    background: chocolate;
+    background: bisque;
     border-radius: 5px;
+}
 
+.album_title {
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.container_photo {
+    width: 100%;
+    text-align: center;
+}
+
+.container_photo a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    transition: color .2s linear;
+    margin-bottom: 5px;
+}
+
+.container_photo a:hover {
+    color: cornflowerblue;
 }

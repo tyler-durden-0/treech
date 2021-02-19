@@ -16,14 +16,14 @@ function requestUsers(){
             const item = document.querySelector('.container')
 
             //метод перебора массива
-            data.forEach( () => {
+            data.forEach( (element) => {
                 item.insertAdjacentHTML('beforeend',
                     '            <div class="container__item">\n' +
                     '                <div class="card">\n' +
                     '                    <div class="user_name">User</div>\n' +
                     '                    <div class="user_bio">Info: </div>\n' +
-                    `                    <div class="user_albums">Albums: <a class="albums_ref" href="" data-userid_for_album=${data[iter].id}>See albums</a></div>\n` +
-                    `                    <div class="user_posts">Posts: <a class="posts_ref" href="" data-userid=${data[iter].id}>See posts</a></div>\n` +
+                    `                    <div class="user_albums">Albums: <a class="albums_ref" href="" data-userid_for_album=${element.id}>See albums</a></div>\n` +
+                    `                    <div class="user_posts">Posts: <a class="posts_ref" href="" data-userid=${element.id}>See posts</a></div>\n` +
                     '                </div>\n' +
                     '            </div>')
                 //добавляю имена в массив для последующей фильтрации при поиске
@@ -121,7 +121,7 @@ function clickOnButtonEsc() {
 //ОЧЕНЬ ВАЖНО!!!!
 //установил интервал для поиска момента когда появяться кнопки
 //а затем добаляю им слушателя и глвное условие по одному разу
-let findEscInterval = setInterval( () => {
+const findEscInterval = setInterval( () => {
     if (document.querySelector('.esc_button') !== null && FLAG === 0) {
         //НАЖАЛ НА КНОПКУ - ПОДНЯЛ ФЛАГ
         FLAG++
@@ -162,14 +162,14 @@ document.addEventListener('click', (event) => {
             const item = document.querySelector('.main')
             item.classList.add("posts")
 
-            data.forEach( () => {
+            data.forEach( (element) => {
 
                 item.insertAdjacentHTML('beforeend',
                     '    <div class="post_item">\n' +
                     '        <div class="post_title"></div>\n' +
                     '        <div class="post_content"></div>\n' +
                     '        <div class="comments_prev">\n' +
-                    `            <a href="#" data-comments=${data[iter].id} data-number="${iter}">See comments:</a>\n` +
+                    `            <a href="#" data-comments=${element.id} data-number="${iter}">See comments:</a>\n` +
                     '        </div>\n' +
                     '    </div>\n'
                 )
@@ -190,12 +190,16 @@ document.addEventListener('click', (event) => {
         fetch(albumsURL + `?userId=${event.target.dataset.userid_for_album}`).then(response => response.json()).then(data => {
             const item = document.querySelector('.main.posts')
             data.forEach( element => {
-                    item.insertAdjacentHTML('beforeend',`<div class="album">${element.id} </div>`)
+                    item.insertAdjacentHTML('beforeend',
+                  `<div class="album">
+                            <div class="album_title">${element.title}</div>
+                            <div class="container_photo"><a href="" data-albumid="${element.id}">See photos</a></div>
+                        </div>`)
                 }
             )
         })
-
-
+    } else if(event.target.dataset.albumid !== undefined) {
+        console.log(event.target.dataset.albumid)
     } else if(event.target.dataset.comments !== undefined) {
         fetch(commentsURL + `?postId=${event.target.dataset.comments}`).then(response => response.json()).then(data => {
 
