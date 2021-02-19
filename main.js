@@ -18,10 +18,10 @@ function requestUsers(){
             data.forEach( () => {
                 item.insertAdjacentHTML('beforeend',
                     '            <div class="container__item">\n' +
-                    `                <div class="card">\n` +
+                    '                <div class="card">\n' +
                     '                    <div class="user_name">User</div>\n' +
                     '                    <div class="user_bio">Info: </div>\n' +
-                    '                    <div class="user_albums">Albums: <a class="albums_ref" href="">See albums</a></div>\n' +
+                    `                    <div class="user_albums">Albums: <a class="albums_ref" href="" data-userid_for_album=${data[iter].id}>See albums</a></div>\n` +
                     `                    <div class="user_posts">Posts: <a class="posts_ref" href="" data-userid=${data[iter].id}>See posts</a></div>\n` +
                     '                </div>\n' +
                     '            </div>')
@@ -40,17 +40,6 @@ function requestUsers(){
 }
 
 requestUsers()
-
-//меняю цвет по приколу 
-const name1 = document.querySelector('.name')
-
-name1.onclick = () => {
-    if(name1.style.color === 'red'){
-        name1.style.color = 'black'
-    }else{
-        name1.style.color = 'red'
-    }
-}
 
 function clickOnButtonFind() {
     //обрабатываем нажатие на кнопку
